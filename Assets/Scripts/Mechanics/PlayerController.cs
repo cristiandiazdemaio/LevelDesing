@@ -33,7 +33,7 @@ namespace Platformer.Mechanics
         public Bounds Bounds => collider2d.bounds;
 
         // --- Doble salto ---
-        public int maxJumpCount = 2;
+        public int maxJumpCount = 1; // Modificado a 1 para poder aprovechar la mecanica de agregar saltos con token
         private int jumpCount = 0;
 
         void Awake()

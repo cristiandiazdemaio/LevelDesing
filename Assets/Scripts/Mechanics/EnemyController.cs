@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Platformer.Gameplay;
 using UnityEngine;
 using static Platformer.Core.Simulation;
@@ -14,6 +15,12 @@ namespace Platformer.Mechanics
     {
         public PatrolPath path;
         public AudioClip ouch;
+
+        //[Tooltip("Make the enemy jump.")]
+        //public bool canJump = false;
+        //[Tooltip("Time between jumps.")]
+        //public float timeBetweenJump = 60.0f;
+        //internal float targetTime = 60.0f;
 
         internal PatrolPath.Mover mover;
         internal AnimationController control;
@@ -42,7 +49,7 @@ namespace Platformer.Mechanics
             }
         }
 
-        void Update()
+        async Task Update()
         {
             if (path != null)
             {
