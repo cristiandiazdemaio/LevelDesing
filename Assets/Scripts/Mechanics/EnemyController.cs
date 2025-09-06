@@ -16,11 +16,11 @@ namespace Platformer.Mechanics
         public PatrolPath path;
         public AudioClip ouch;
 
-        //[Tooltip("Make the enemy jump.")]
-        //public bool canJump = false;
-        //[Tooltip("Time between jumps.")]
-        //public float timeBetweenJump = 60.0f;
-        //internal float targetTime = 60.0f;
+        [Tooltip("Make the enemy jump.")]
+        public bool canJump = false;
+        [Tooltip("Time between jumps.")]
+        public float timeBetweenJump = 60.0f;
+        public float targetTime = 60.0f;
 
         internal PatrolPath.Mover mover;
         internal AnimationController control;
@@ -57,6 +57,8 @@ namespace Platformer.Mechanics
                 control.move.x = Mathf.Clamp(mover.Position.x - transform.position.x, -1, 1);
             }
         }
+
+
 
     }
 }

@@ -36,6 +36,10 @@ namespace Platformer.Mechanics
         /// </summary>
         public bool stopJump;
 
+        public bool thisEnemyJump;
+        public float timeToJump = 10.0f;
+        public float timeWaiting = 1.0f;
+
         SpriteRenderer spriteRenderer;
         Animator animator;
         PlatformerModel model = Simulation.GetModel<PlatformerModel>();
@@ -44,6 +48,14 @@ namespace Platformer.Mechanics
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             animator = GetComponent<Animator>();
+        }
+
+        public void Start()
+        {
+            if (thisEnemyJump)
+            {
+                StartCoroutine(EnemyJump(timeToJump, timeWaiting));
+            }
         }
 
         protected override void ComputeVelocity()
@@ -71,6 +83,17 @@ namespace Platformer.Mechanics
             animator.SetFloat("velocityX", Mathf.Abs(velocity.x) / maxSpeed);
 
             targetVelocity = move * maxSpeed;
+        }
+
+        IEnumerator EnemyJump(float time, float wait)
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(time);
+                animator.SetBool("want_jump", true);
+                yield return new WaitForSeconds(wait);
+                animator.SetBool("want_jump", false);
+            }
         }
     }
 }
